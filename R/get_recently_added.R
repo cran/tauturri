@@ -1,7 +1,7 @@
 #' Get Recently Added Media Items
 #'
 #' @inheritParams api_request
-#' @param count THe number of items to return, default is `10`.
+#' @param count The number of items to return, default is `10`.
 #' @param section_id Optional. The id of the Plex library section, e.g. `1``
 #' @param start Optional. The item number to start at, e.g. `0`
 #'
@@ -31,5 +31,10 @@ get_recently_added <- function(url = NULL, apikey = NULL, count = 10,
     count = count, section_id = section_id, start = start
   )
 
-  map_df(result$data$recently_added, as_tibble)
+  map_df(result$data$recently_added, function(x) {
+    x <- map_if(x, .p = ~is.null(.x), function(y) return(NA))
+    x <- map_if(x, .p = ~identical(.x, list()), function(y) return(NA))
+
+    as_tibble(x)
+  })
 }

@@ -12,10 +12,10 @@
 words
 }
 \description{
-A subset of 283 of the 1000 most commong English words.
+A subset of 283 of the 1000 most common English words.
 From the original list, only words longer than 5 and without apostrophes were selected.
 }
 \note{
-I should have just used \code{stringr::\link[stringr]{words}}
+I should have just used \code{stringr::words}
 }
 \keyword{dataset}
